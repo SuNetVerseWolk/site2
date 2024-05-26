@@ -90,6 +90,8 @@ img {
 }
 .burgerContainer {
     display: none;
+    position: relative;
+    z-index: 5;
 
     height: 40px;
     padding: 10px;
@@ -111,16 +113,17 @@ img {
     gap: 20px;
 }
 .popup {
-    display: none;
+    /* display: none; */
     justify-content: center;
 
     position: absolute;
     z-index: 3;
     right: 0;
+
     width: 50%;
     height: 100%;
-
     background: #2f2f33;
+    transition: all .3s ease-in;
 }
 .popup * {
     color: #c1beb1;
@@ -130,6 +133,7 @@ img {
 }
 .popup button:hover {
     background: #c1beb1;
+    color: #20202a;
 }
 .popup ul a::before,
 .popup ul a::after {
