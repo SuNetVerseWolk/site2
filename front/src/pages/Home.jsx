@@ -2,6 +2,7 @@ import React from 'react'
 import Header from 'layouts/Header';
 import { Outlet, useParams } from 'react-router-dom';
 import Rooms from 'layouts/Rooms';
+import Main from 'layouts/Main';
 
 const Home = () => {
   const { booked } = useParams();
@@ -9,10 +10,11 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div>
+      <Main />
+      {/* <div>
         <h2>Комнаты</h2>
         {booked ? <Outlet /> : <Rooms />}
-      </div>
+      </div> */}
     </div>
   )
 }
