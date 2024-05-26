@@ -3,7 +3,7 @@ import styles from "styles/header.module.css";
 
 function Header() {
   return (
-    <div className={styles.container}>
+    <header>
         <div>
           <img src="logo.png" alt="..." />
 
@@ -15,7 +15,7 @@ function Header() {
             <li>Контакты</li>
           </ul>
         </div>
-    </div>
+    </header>
   )
 }
 

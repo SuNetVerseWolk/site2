@@ -1,6 +1,12 @@
-.container {
+header {
+    height: 150px;
+}
+header > div {
     display: flex;
     align-items: center;
+}
 
+img {
+    width: 150px;
     height: 150px;
 }
