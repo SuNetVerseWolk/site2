@@ -14,10 +14,10 @@ const NavLinks = () => {
 		hash: '#rooms',
 		text: 'Номера'
 	}, {
-		hash: '#a',
+		hash: '#services',
 		text: 'Услуги'
 	}, {
-		hash: '#b',
+		hash: '#data',
 		text: 'Контакты'
 	}]
 

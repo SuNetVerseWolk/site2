@@ -118,7 +118,6 @@ img {
     gap: 20px;
 }
 .popup {
-    /* display: none; */
     justify-content: center;
 
     position: absolute;
@@ -126,9 +125,15 @@ img {
     right: 0;
 
     width: 50%;
-    height: 100%;
+    translate: 0 -100%;
+    height: 100vh;
     background: #2f2f33;
-    transition: all .3s ease-in;
+    animation: appear .3s forwards ease-in;
+}
+@keyframes appear {
+    to {
+        translate: 0 0;
+    }
 }
 .popup * {
     color: #c1beb1;

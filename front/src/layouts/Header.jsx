@@ -1,5 +1,5 @@
 // import BurgerMenu from 'components/BurgerMenu';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import styles from "styles/header.module.css";
 import NavLinks from './NavLinks';

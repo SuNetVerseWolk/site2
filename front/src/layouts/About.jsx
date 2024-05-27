@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from 'styles/section_2.module.css'
+import styles from 'styles/about.module.css'
 
-const Section_2 = () => {
+const About = () => {
   return (
-    <section id='about' className={styles.section_2}>
+    <section id='about' className={styles.about}>
         <div>
             <h2>О нас</h2>
 
@@ -15,4 +15,4 @@ const Section_2 = () => {
   )
 }
 
-export default Section_2
+export default About
