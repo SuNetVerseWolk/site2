@@ -1,0 +1,10 @@
+.main {
+    display: flex;
+    flex-flow: column nowrap;
+    /* justify-content: center; */
+    align-items: center;
+
+    > section, > div {
+        width: clamp(320px, 95svw, 900px);
+    }
+}

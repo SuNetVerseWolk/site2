@@ -1,0 +1,21 @@
+.bookBtn {
+    display: flex;
+    flex-flow: column nowrap;
+
+    h3 {
+        text-align: center;
+    }
+
+    button {
+        padding: 10px 40px;
+        border: #20202a 1px solid;
+        background: none;
+    
+        transition: all .3s ease-out;
+
+        &:hover {
+            color: #c1beb1;
+            background: #20202a;
+        }
+    }
+}

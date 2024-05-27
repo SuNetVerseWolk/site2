@@ -1,20 +1,15 @@
 import React from 'react'
 import Header from 'layouts/Header';
-import { Outlet, useParams } from 'react-router-dom';
-import Rooms from 'layouts/Rooms';
 import Main from 'layouts/Main';
+import Room from 'layouts/Room';
+import Footer from 'layouts/Footer';
 
 const Home = () => {
-  const { booked } = useParams();
-
   return (
     <div>
       <Header />
       <Main />
-      {/* <div>
-        <h2>Комнаты</h2>
-        {booked ? <Outlet /> : <Rooms />}
-      </div> */}
+      <Footer />
     </div>
   )
 }

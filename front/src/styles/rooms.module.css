@@ -1,0 +1,32 @@
+.rooms {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+
+    > button {
+        width: 5%;
+        aspect-ratio: 1;
+    }
+    > button.left {
+        margin-right: 2%;
+    }
+    > button.right {
+        margin-left: 2%;
+    }
+
+    > div {
+        display: flex;
+        align-items: center;
+        gap: 5%;
+
+        width: 90%;
+        height: 100%;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        overflow-x: scroll;
+
+        /* padding-block: 15%; */
+    }
+}

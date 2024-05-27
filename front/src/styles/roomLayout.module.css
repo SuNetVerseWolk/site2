@@ -1,0 +1,12 @@
+.roomLayout {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    height: calc(80svh - 100px);
+    padding-block: 30px;
+
+    h2 {
+        text-align: center;
+    }
+}

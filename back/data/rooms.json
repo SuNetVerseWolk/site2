@@ -1,1 +1,1 @@
-[]
+[{ "id": 0, "name": "№1", "price": 1000, "description": "Room with 1 bed.", "src": "apart1.jpg"}, {"id": 1, "name": "№2", "price": 1100, "description": "Room with 1 bed.", "src": "apart2.jpg"}, { "id": 3, "name": "№3", "price": 2500, "description": "Room with 2 bed.", "src": "apart3.jpg"}]
