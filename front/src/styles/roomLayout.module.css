@@ -3,7 +3,7 @@
     flex-flow: column nowrap;
     justify-content: center;
 
-    height: calc(80svh - 100px);
+    height: 100%;
     padding-block: 30px;
 
     h2 {

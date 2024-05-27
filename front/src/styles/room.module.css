@@ -18,6 +18,11 @@
         object-fit: cover;
     }
 
+    p {
+        font-size: 70%;
+        margin: 5px 0;
+    }
+
     > div {
         display: flex;
         flex-flow: column nowrap;

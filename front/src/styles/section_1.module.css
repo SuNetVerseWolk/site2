@@ -1,4 +1,4 @@
-section {
+/* section {
     --imgBottom: 50px;
 
     display: flex;
@@ -8,8 +8,6 @@ section {
     background-size: cover;
     padding: 20px;
     margin-bottom: var(--imgBottom);
-    /* background: rgb(65,65,38);
-    background: radial-gradient(circle, rgba(65,65,38,1) 0%, rgba(21,21,29,1) 100%); */
     
     position: relative;
     min-width: 900px;
@@ -34,11 +32,57 @@ section > div > img:nth-child(2) {
 
     position: relative;
     top: var(--imgBottom);
-}
-
+} */
 
 /* @media (max-width: 768px) {
     section h1 {
         font-size: 30px;
     }
-} */
+} */ 
+section {
+    display: flex;
+    justify-content: center;
+
+    height: 100%;
+    background-size: cover;
+    padding: 20px;
+    /* background: url(jj.avif) 100% no-repeat; */
+    background-size: cover;
+    width: 100%;
+    /* background: rgb(65,65,38);
+    background: radial-gradient(circle, rgba(65,65,38,1) 0%, rgba(21,21,29,1) 100%); */
+}
+
+section > div {
+    position: relative;
+
+    width: 900px;
+}
+section > div img {
+    width: 50%;
+}
+section > div img:nth-child(3) {
+    position: absolute;
+    bottom: -50px;
+    width: 40%;
+}
+
+.sloganContainer {
+    padding: 20px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 2;
+
+    background: #000000aa;
+}
+.sloganContainer h1 {
+    color: #c1beb1;
+    font-size: 40px;
+}
+
+@media (max-width: 768px) {
+    .sloganContainer h1 {
+        font-size: 30px;
+    }
+}
