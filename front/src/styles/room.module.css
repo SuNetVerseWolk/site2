@@ -20,6 +20,8 @@
     }
 
     p {
+        display: flex;
+        justify-content: space-between;
         font-size: 70%;
         margin: 5px 0;
     }

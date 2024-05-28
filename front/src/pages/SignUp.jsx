@@ -1,8 +1,25 @@
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from 'styles/forms.module.css'
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: data => axios.post(`/api/users/signUp`, data),
+    onSuccess: res => {
+      localStorage.setItem('id', res.data.id);
+      navigate('..');
+    }
+  })
+
+  const submit = e => {
+    e.preventDefault();
+
+    mutate(Object.fromEntries(new FormData(e.target).entries()));
+  }
+
   return (
     <div className={styles.containerForm}>
        <div id={styles.signUp}>
@@ -11,7 +28,7 @@ const SignUp = () => {
 
           <h2>Регистрация</h2>
 
-          <form>
+          <form onSubmit={submit}>
             <div>
               <div>
                 <label htmlFor="lastName">

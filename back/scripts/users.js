@@ -27,14 +27,30 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 	if (!req.body.type || req.query.key !== process.env.ADMIN_ID) return res.sendStatus(403);
 
-	const user = { ...req.body, id: Date.now(), name: '', password: '' }
-	const users = getData(user.type);
+	const user = { ...req.body, id: Date.now() }
+	const users = getUsers();
+
+	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName))
+		return res.sendStatus(400);
 
 	users.push(user);
 
-	if (setData(user.type, users)) return res.status(201).json({ type: user.type});
+	if (setUsers(users)) return res.sendStatus(201);
 	res.sendStatus(500);
 })
+router.post('/book/:id', (req, res) => {
+	const users = getUsers();
+	const user = users.find(user => user.id === +req.params.id);
+
+	if (!user) return res.sendStatus(404);
+	if (!req.body.bookedRooms) return res.sendStatus(400);
+
+	user.bookedRooms = [...user.bookedRooms, ...req.body.bookedRooms];
+	
+	if (setUsers(users)) return res.sendStatus(201);
+
+	res.sendStatus(500);
+});
 router.post('/change', (req, res) => {
 	const
 		userID = +req.query.id,
@@ -99,31 +115,24 @@ router.get('/logIn', (req, res) => {
 })
 router.post('/signUp', (req, res) => {
 	const bodyKeys = Object.keys(req.body);
-	if (!(bodyKeys.includes('name') && bodyKeys.includes('password') && bodyKeys.includes('confirmPassword'))) {
+	
+	if (!(
+			bodyKeys.includes('name') &&
+			bodyKeys.includes('lastName') &&
+			bodyKeys.includes('fatherName') &&
+			bodyKeys.includes('number') &&
+			bodyKeys.includes('password') &&
+			bodyKeys.includes('login')
+		)) {
 		return res.status(400).json(false);
 	}
-	if (req.body.password !== req.body.confirmPassword) return res.status(412).json(false);
-	const user = { name: req.body.name, password: req.body.password, id: Date.now() }
+	const user = { ...req.body, id: Date.now(), bookedRooms: [] }
+	const users = getUsers();
 
-	if (req.body.type === 'teacher') {
-		const
-			teachers = getData(dataPaths.teachers),
-			teacher = teachers.find(teacher => teacher.name === req.body.name)
+	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName) != -1)
+		return res.sendStatus(403);
 
-		if (teacher) return res.status(302)
-		if (setData(dataPaths.teachers, teachers.push(user))) return res.status(201).json({ id: user.id, type: dataPaths.teachers });
-		return res.status(500).json("not added")
-	}
-
-	const
-		students = getData(dataPaths.students),
-		student = students.find(student => student.name === req.body.name)
-
-	if (student) {
-		if(student.password !== req.body.password) return res.status(302).json(false);
-		return res.status(200).json({ id: student.id, type: dataPaths.students });
-	}
-	if (setData(dataPaths.students, [...students, user])) return res.status(201).json({ id: user.id, type: dataPaths.students });
+	if (setUsers([...users, user])) return res.status(201).json({ id: user.id });
 	res.status(500).json(false);
 })
 
