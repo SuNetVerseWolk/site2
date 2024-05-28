@@ -8,7 +8,7 @@ const Room = () => {
 
   return (
     <div className={roomLayout}>
-      <h2 id='rooms'>Варианты номеров</h2>
+      <h2>Варианты номеров</h2>
 
       {booked ? <Outlet /> : <Rooms />}
     </div>

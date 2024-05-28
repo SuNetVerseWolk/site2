@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import styles from "styles/header.module.css";
 import NavLinks from './NavLinks';
+import LogInBtn from 'components/LogInBtn';
 
 function Header() {
   const [open, setIsOpened] = useState(false);
@@ -11,7 +12,7 @@ function Header() {
     <header>
       {open && (
         <div className={styles.popup}>
-          <button>Войти</button>
+          <LogInBtn />
 
           <NavLinks />
         </div>
@@ -20,8 +21,7 @@ function Header() {
         <a to=''><img src="logo2.png" alt="..." /></a>
 
         <NavLinks />
-
-        <button>Войти</button>
+        <LogInBtn />
         
         <button onClick={e => open ? setIsOpened(false) : setIsOpened(true)} className={styles.burgerContainer}>
           <div className={styles.burgerMenu}></div>

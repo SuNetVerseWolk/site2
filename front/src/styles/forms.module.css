@@ -1,0 +1,105 @@
+.containerForm {
+  display: grid;
+  place-items: center;
+
+  height: 100vh;
+  overflow: hidden;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    position: relative;
+
+    border: #20202a 1px solid;
+    padding: clamp(25px, 5vw, 50px);
+    width: clamp(300px, 90vw, 400px);
+    background: #fff;
+
+    &#signUp {
+      width: clamp(300px, 90vw, 500px);
+
+      #i1 {
+        top: 15%;
+        left: -50%;
+
+        height: 120%;
+        width: clamp(300px, 90vw, 350px);
+      }
+      #i2 {
+        top: -15%;
+        right: -40%;
+
+        height: 120%;
+        width: clamp(300px, 90vw, 350px);
+      }
+    }
+
+    #i1 {
+      position: absolute;
+      top: -20%;
+      left: -40%;
+      z-index: -5;
+
+      height: 130%;
+      width: clamp(300px, 90vw, 250px);
+    }
+    #i2 {
+      position: absolute;
+      top: 15%;
+      right: -50%;
+      z-index: -5;
+
+      height: 130%;
+      width: clamp(300px, 90vw, 250px);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      
+      > div {
+        display: flex;
+        gap: 10%;
+      }
+
+      width: 100%;
+
+      *:not(label) {
+        margin-block: 10px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+
+        font-style: italic;
+      }
+
+      input {
+        padding: 10px;
+        border: none;
+        border-bottom: #20202a 1px solid;
+        font-size: 20px;
+        width: 100%;
+      }
+      button {
+        padding: 10px 40px;
+        border: #20202a 1px solid;
+        background: none;
+    
+        transition: all .3s ease-out;
+      }
+      button:hover {
+        color: #c1beb1;
+        background: #20202a;
+      }
+      a {
+        text-decoration: underline;
+        font-weight: 700;
+      }
+    }
+  }
+}

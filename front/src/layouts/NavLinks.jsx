@@ -25,7 +25,9 @@ const NavLinks = () => {
 		<ul>
 			{links.map((link, i, array) => (
 				<li>
-					<Link key={link.text + Date.now()} to={link.hash} children={link.text}/>
+					<Link onClick={e => {
+						if (i === 0) window.scrollTo({top: 0, behavior: 'smooth'});
+					}} key={link.text + Date.now()} to={link.hash} children={link.text}/>
 				</li>
 			))}
 		</ul>
