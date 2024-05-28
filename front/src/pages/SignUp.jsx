@@ -45,13 +45,13 @@ const SignUp = () => {
                 </label>
               </div>
               <div>
-                <label htmlFor="number">
-                  Номер:
-                  <input id='number' name='number' type="tel" placeholder='+7 (900) 800-90-90' required />
-                </label>
                 <label htmlFor="fatherName">
                   Отчество:
                   <input id='fatherName' name='fatherName' type="text" placeholder='Владимирович' required />
+                </label>
+                <label htmlFor="number">
+                  Номер:
+                  <input id='number' name='number' type="tel" placeholder='+7 (900) 800-90-90' required />
                 </label>
                 <label htmlFor="password">
                   Пароль:
