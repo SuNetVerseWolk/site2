@@ -22,7 +22,7 @@ const LogIn = () => {
             </label>
 
             <Link to='/signUp'>Зарегистрироваться</Link>
-
+            
             <button>Войти</button>
           </form>
        </div>

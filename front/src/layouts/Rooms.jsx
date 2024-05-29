@@ -5,7 +5,7 @@ import getApi from 'api/get';
 import Room from 'components/Room';
 import style from 'styles/rooms.module.css'
 
-const Rooms = () => {
+const Rooms = ({ popupForm }) => {
   const { booked } = useParams();
   const booksKinds = JSON.parse(import.meta.env.VITE_BOOKSKINDS);
   const booksKind = useMemo(e => booked === booksKinds.booked ? booksKinds.booked : booksKinds.rooms, [booked, booksKinds]);
@@ -32,7 +32,7 @@ const Rooms = () => {
             scrollEl.scrollTo({ behavior: 'smooth', left: scrollEl.scrollLeft - scrollEl.children[0].offsetWidth});
           }}>{'<'}</button>
           <div ref={roomContainer}>
-            {rooms?.map(room => <Room key={room.id} {...room} />)}
+            {rooms?.map(room => <Room popupForm={popupForm} key={room.id} {...room} />)}
           </div>
           <button className={style.right} onClick={e => {
             const scrollEl = roomContainer.current;

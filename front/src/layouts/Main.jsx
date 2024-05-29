@@ -5,12 +5,12 @@ import { main } from 'styles/main.module.css'
 import About from './About'
 import Services from './Services'
 
-const Main = () => {
+const Main = ({ popupForm }) => {
   return (
     <main className={main}>
       <Section_1 />
       <About />
-      <Room />
+      <Room popupForm={popupForm} />
       <Services />
 
     </main>
