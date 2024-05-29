@@ -16,7 +16,7 @@ const UserBtn = () => {
     <>
       {localStorage.getItem("id") ? (
         isLoading ? (
-          "loading..."
+          "Загрузка..."
         ) : !isError ? (
           <button>{user.login}</button>
         ) : (
