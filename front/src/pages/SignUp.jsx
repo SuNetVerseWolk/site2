@@ -1,10 +1,11 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from 'styles/forms.module.css'
 
 const SignUp = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: data => axios.post(`/api/users/signUp`, data),
@@ -16,7 +17,7 @@ const SignUp = () => {
 
   const submit = e => {
     e.preventDefault();
-
+    queryClient.invalidateQueries(['user'])
     mutate(Object.fromEntries(new FormData(e.target).entries()));
   }
 

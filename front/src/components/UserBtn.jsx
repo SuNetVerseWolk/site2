@@ -8,11 +8,10 @@ const UserBtn = ({ setIsOpenedUF, setIsOpened }) => {
     isLoading,
     isError,
   } = getApi({
-    key: ["user"],
+    key: ['user'],
     path: "/users/" + localStorage.getItem("id"),
   });
 
-  console.log(user)
   return (
     <>
       {localStorage.getItem("id") ? (
