@@ -186,6 +186,11 @@ img {
 }
 .headerBlack button {
     border: #c1beb1 1px solid;
+
+    &:hover {
+        background: #c1beb1;
+        color: #20202a;
+    }
 }
 .headerBlack {
     .burgerMenu,

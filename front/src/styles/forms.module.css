@@ -205,10 +205,17 @@
     
     button {
       padding: 15px 40px;
-      border: #20202a 1px solid;
+      border: #c1beb1 1px solid;
       width: 50%;
       font-size: 20px;
       background: #20202a;
+
+      transition: .2s ease-in-out;
+
+      &:hover {
+        background: #c1beb1;
+        color: #20202a;
+      }
     }
   }
 }
@@ -251,12 +258,11 @@
       font-size: 15px;
       width: 100%;
       background: #20202a;
-      /* margin-bottom: 10px; */
     }
     
     button {
       padding: 15px 40px;
-      border: #20202a 1px solid;
+      border: #c1beb1 1px solid;
       width: 100%;
       font-size: 20px;
       background: #20202a;
@@ -264,9 +270,11 @@
       transition: .2s ease-in-out;
 
       &:hover {
-        border: #c1beb1 1px solid;
+        background: #c1beb1;
+        color: #20202a;
       }
       &:last-child:hover {
+        color: #c05757;
         border: #c05757 1px solid;
       }
     }
@@ -293,7 +301,12 @@
   transition: .2s ease-in-out;
 
   &:hover {
-    background: #20202a;
+    background: #c1beb1;
+
+    &::before,
+    &::after {
+      background: #20202a;
+    }
   }
 
   &::before,
