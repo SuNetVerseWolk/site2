@@ -16,8 +16,6 @@ const BookForm = ({ popupForm }) => {
 
   console.log(rooms);
 
-
-
   return (
     <div ref={popupForm} className={styles.popUpForm}>
       <button

@@ -2,7 +2,7 @@ import getApi from "api/get";
 import React from "react";
 import LogInBtn from "./LogInBtn";
 
-const UserBtn = () => {
+const UserBtn = ({ setIsOpenedUF, setIsOpened }) => {
   const {
     data: user,
     isLoading,
@@ -19,7 +19,10 @@ const UserBtn = () => {
         isLoading ? (
           "Загрузка..."
         ) : !isError ? (
-          <button>{user.login}</button>
+          <button onClick={e => {
+            setIsOpenedUF(true);
+            setIsOpened && setIsOpened(false);
+          }}>{user.login}</button>
         ) : (
           <LogInBtn />
         )

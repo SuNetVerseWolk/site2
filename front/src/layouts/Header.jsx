@@ -7,9 +7,12 @@ import LogInBtn from 'components/LogInBtn';
 import { useQuery } from '@tanstack/react-query';
 import getApi from 'api/get';
 import UserBtn from 'components/UserBtn';
+import BurgerBtn from 'components/BurgerBtn';
+import UserForm from './UserForm';
 
 function Header() {
   const [open, setIsOpened] = useState(false);
+  const [openUserForm, setIsOpenedUF] = useState(false);
 
   useEffect(e => {
     addEventListener('scroll', e => {
@@ -20,28 +23,28 @@ function Header() {
       else
         document.querySelector('header').classList.remove(styles.headerBlack)
     })
-  }, [])
+  }, []);
 
   return (
-    <header>
-      {open && (
-        <div className={styles.popup}>
-          <UserBtn />
+    <>
+      <UserForm openUserForm={openUserForm} setIsOpenedUF={setIsOpenedUF}/>
+      <header>
+        {open && (
+          <div className={styles.popup}>
+            <UserBtn setIsOpened={setIsOpened} setIsOpenedUF={setIsOpenedUF} />
+
+            <NavLinks />
+          </div>
+        )}
+        <div className={styles.container}>
+          <a to=''><img src="logo2.png" alt="..." /></a>
 
           <NavLinks />
+          <UserBtn setIsOpenedUF={setIsOpenedUF} />
+          <BurgerBtn setIsOpened={setIsOpened} />
         </div>
-      )}
-      <div className={styles.container}>
-        <a to=''><img src="logo2.png" alt="..." /></a>
-
-        <NavLinks />
-        <UserBtn />
-        
-        <button onClick={e => open ? setIsOpened(false) : setIsOpened(true)} className={styles.burgerContainer}>
-          <div className={styles.burgerMenu}></div>
-        </button>
-      </div>
-    </header>
+      </header>
+    </>
   )
 }
 
