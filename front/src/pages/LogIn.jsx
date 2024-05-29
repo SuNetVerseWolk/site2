@@ -31,9 +31,9 @@ const LogIn = () => {
           <h2>Авторизация</h2>
 
           <form onSubmit={submit}>
-            <label htmlFor="login">
-              Логин:
-              <input id='login' name='login' type="text" required />
+            <label htmlFor="number">
+              Номер:
+              <input id='number' name='number' type="text" required />
             </label>
             <label htmlFor="password">
               Пароль:

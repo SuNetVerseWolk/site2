@@ -39,9 +39,9 @@ const UserForm = ({ openUserForm, setIsOpenedUF }) => {
                 Отчество:
                 <input id='fatherName' name='fatherName' defaultValue={user?.lastName} type="text" required />
               </label>
-              <label htmlFor="login">
-                Логин:
-                <input id='login' name='login' type="text" defaultValue={user?.login} required />
+              <label htmlFor="email">
+                Email:
+                <input id='email' name='email' type="text" defaultValue={user?.email} required />
               </label>
               <label htmlFor="number">
                 Номер:

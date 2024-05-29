@@ -87,8 +87,9 @@ router.post('/logIn', (req, res) => {
 	) return res.json({ id: process.env.ADMIN_ID, type: process.env.ADMIN_ID });
 
 	const users = getUsers();
-	let user = users.find(user => user.login === req.body.login);
+	let user = users.find(user => user.number === req.body.number);
 
+	console.log(user)
 	if (!user) return res.sendStatus(404);
 
 	const { id, password } = user;
@@ -107,14 +108,14 @@ router.post('/signUp', (req, res) => {
 			bodyKeys.includes('fatherName') &&
 			bodyKeys.includes('number') &&
 			bodyKeys.includes('password') &&
-			bodyKeys.includes('login')
+			bodyKeys.includes('email')
 		)) {
 		return res.status(400).json(false);
 	}
 	const user = { ...req.body, id: Date.now(), bookedRooms: [] }
 	const users = getUsers();
 
-	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName || selfUser.login === user.login) != -1)
+	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName || selfUser.number === user.number) != -1)
 		return res.sendStatus(403);
 
 	if (setUsers([...users, user])) return res.status(201).json({ id: user.id });
