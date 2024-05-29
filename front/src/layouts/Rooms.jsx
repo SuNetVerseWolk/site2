@@ -7,7 +7,7 @@ import style from 'styles/rooms.module.css'
 
 const Rooms = ({ popupForm }) => {
   const { booked } = useParams();
-  const booksKinds = JSON.parse(import.meta.env.VITE_BOOKSKINDS);
+  const booksKinds = useMemo(e => JSON.parse(import.meta.env.VITE_BOOKSKINDS), []);
   const booksKind = useMemo(e => booked === booksKinds.booked ? booksKinds.booked : booksKinds.rooms, [booked, booksKinds]);
   const isBooked = useMemo(e => booksKind === booksKinds.booked, [booksKind, booksKinds]);
   const roomContainer = useRef();
