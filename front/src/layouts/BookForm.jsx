@@ -1,8 +1,11 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getApi from "api/get";
+import axios from "axios";
 import React, { useMemo, useRef, useState } from "react";
 import styles from "styles/forms.module.css";
 
 const BookForm = ({ popupForm }) => {
+  const queryClient = useQueryClient();
 	const formRef = useRef();
 	const getFormData = (e) =>
 		Object.fromEntries(new FormData(formRef.current).entries());
@@ -20,7 +23,7 @@ const BookForm = ({ popupForm }) => {
 	const { data: rooms } = getApi({
 		key: [booksKinds.rooms],
 		path: booksKinds.rooms,
-		onSuccess: date => setPrice(date?.[0].price)
+		onSuccess: date => setPrice(prev => prev <= 0 ? date?.[0].price : prev)
 	});
 	const [price, setPrice] = useState(0);
 
@@ -42,6 +45,17 @@ const BookForm = ({ popupForm }) => {
 		);
 	};
 
+	const { mutate } = useMutation({
+		mutationFn: data => axios.post('/api/users/book', data),
+		onSuccess: res => queryClient.invalidateQueries(['rooms'])
+	});
+
+	const submit = e => {
+		e.preventDefault();
+
+		mutate({...Object.fromEntries(new FormData(e.target).entries()), price});
+	}
+
 	return (
 		<div ref={popupForm} className={styles.popUpForm}>
 			<button
@@ -49,7 +63,7 @@ const BookForm = ({ popupForm }) => {
 				className={styles.close}
 			></button>
 
-			<form ref={formRef} onChange={changeForm}>
+			<form ref={formRef} onChange={changeForm} onSubmit={submit}>
 				<div>
 					<h2>Данные клиента</h2>
 					<label htmlFor="lastName">

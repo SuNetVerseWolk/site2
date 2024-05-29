@@ -23,14 +23,46 @@ router.get('/:id', (req, res) => {
 	res.status(404).json(false);
 });
 
-router.post('/book/:id', (req, res) => {
+router.post('/book', (req, res) => {
 	const users = getUsers();
-	const user = users.find(user => user.id === +req.params.id);
+	const rooms = getData('rooms');
+	let
+	book = {
+		id: Date.now(),
+		countPeople: +req.body.countPeople,
+		countRooms: +req.body.countRooms,
+		comeDate: req.body.comeDate,
+		outDate: req.body.outDate,
+		price: req.body.price
+	},
+	typeRoom = req.body.typeRoom,
+	user = users.find(user => user.number === req.body.number),
+	haveUser = !!user;
 
-	if (!user) return res.sendStatus(404);
-	if (!req.body.bookedRooms) return res.sendStatus(400);
+	if (book.price <= 0) return res.sendStatus(400);
 
-	user.bookedRooms = [...user.bookedRooms, ...req.body.bookedRooms];
+	user = haveUser ? user : {
+		name: req.body.name,
+		lastName: req.body.lastName,
+		fatherName: req.body.fatherName,
+		number: req.body.number,
+		email: '',
+		password: req.body.number,
+		id: Date.now(),
+		bookedRooms: []
+	};
+
+	const room = user.bookedRooms.find(room => room.typeRoom === typeRoom);
+
+	if (!!room) room.books.push(book);
+	else user.bookedRooms.push({typeRoom, books: [book]});
+
+	if (!haveUser) users.push(user);
+
+	const roomType = rooms.find(room => room.name === typeRoom);
+	if (roomType.bookedAmount + book.countRooms > roomType.amount) return res.sendStatus(403);
+	roomType.bookedAmount = roomType.bookedAmount + book.countRooms;
+	setData('rooms', rooms);
 	
 	if (setUsers(users)) return res.sendStatus(201);
 
