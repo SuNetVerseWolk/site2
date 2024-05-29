@@ -6,7 +6,7 @@ const NavLinks = () => {
 	const location = useLocation();
 	const links = [{
 		hash: '#home',
-		text: 'Гавная'
+		text: 'Главная'
 	}, {
 		hash: '#about',
 		text: 'О нас'
