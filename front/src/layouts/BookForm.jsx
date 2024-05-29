@@ -1,20 +1,40 @@
 import getApi from "api/get";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import styles from "styles/forms.module.css";
 
 const BookForm = ({ popupForm }) => {
+  const formRef = useRef();
+  const priceRef = useRef();
+  const getFormData = (e) =>
+    Object.fromEntries(new FormData(formRef.current).entries());
+  const getCurrentRoomData = (e) =>
+    rooms?.find((room) => room.name === getFormData().typeRoom);
   const { data: user } = getApi({
     key: ["user"],
     path: "/users/" + localStorage.getItem("id"),
   });
-  
-  const booksKinds = useMemo(e => JSON.parse(import.meta.env.VITE_BOOKSKINDS), []);
+
+  const booksKinds = useMemo(
+    (e) => JSON.parse(import.meta.env.VITE_BOOKSKINDS),
+    []
+  );
   const { data: rooms } = getApi({
     key: [booksKinds.rooms],
-    path: booksKinds.rooms
-  })
+    path: booksKinds.rooms,
+  });
 
-  console.log(rooms);
+  function datediff(first, second) {
+    return Math.round((second - first) / (1000 * 60 * 60 * 24));
+  }
+
+  const changeForm = (e) => {
+    const formData = getFormData();
+    const come = new Date(formData.comeDate);
+    const out = new Date(formData.outDate);
+    const days = datediff(come, out) + 1;
+
+    priceRef.current.textContent = getCurrentRoomData()?.price * formData.countPeople * formData.countRooms * (days || 1);
+  };
 
   return (
     <div ref={popupForm} className={styles.popUpForm}>
@@ -23,7 +43,7 @@ const BookForm = ({ popupForm }) => {
         className={styles.close}
       ></button>
 
-      <form>
+      <form ref={formRef} onChange={changeForm}>
         <div>
           <h2>Данные клиента</h2>
           <label htmlFor="lastName">
@@ -72,7 +92,15 @@ const BookForm = ({ popupForm }) => {
           </label>
         </div>
         <div>
-          <select name="typeRoom" id="typeRoom">
+          <select
+            name="typeRoom"
+            id="typeRoom"
+            defaultValue={popupForm.current?.getAttribute("data-type")}
+            onChange={(e) => {
+              formRef.current.countRooms.value = 1;
+              formRef.current.countPeople.value = 1;
+            }}
+          >
             <option>Классика</option>
             <option>Стандарт</option>
             <option>Люкс</option>
@@ -95,12 +123,22 @@ const BookForm = ({ popupForm }) => {
               type="number"
               required
               defaultValue={1}
+              onChange={(e) => {
+                const roomByType = getCurrentRoomData();
+
+                if (
+                  +e.target.value + roomByType.bookedAmount >
+                  roomByType.amount
+                )
+                  e.target.value = roomByType.amount;
+              }}
+              min={1}
             />
           </label>
 
           <label htmlFor="comeDate">
             Дата приезда:
-            <input id="comeDate" name="comeData" type="date" required />
+            <input id="comeDate" name="comeDate" type="date" required />
           </label>
           <label htmlFor="outDate">
             Дата отъезда:
@@ -110,7 +148,9 @@ const BookForm = ({ popupForm }) => {
         <div>
           <button>Забронировать</button>
 
-          <span>1000 руб.</span>
+          <span>
+            <span ref={priceRef}>{getCurrentRoomData()?.price}</span> руб.
+          </span>
         </div>
       </form>
     </div>
