@@ -12,6 +12,7 @@ const UserBtn = () => {
     path: "/users/" + localStorage.getItem("id"),
   });
 
+  console.log(user)
   return (
     <>
       {localStorage.getItem("id") ? (
