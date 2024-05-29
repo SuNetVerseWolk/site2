@@ -11,6 +11,7 @@ const SignUp = () => {
     mutationFn: data => axios.post(`/api/users/signUp`, data),
     onSuccess: res => {
       localStorage.setItem('id', res.data.id);
+      queryClient.invalidateQueries(['user']);
       navigate('..');
     }
   })

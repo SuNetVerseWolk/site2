@@ -1,7 +1,6 @@
 const
 express = require('express'),
-getData = require('./getData'),
-setData = require('./setData'),
+{ getData, setData } = require('../getScripts'),
 router = express.Router();
 
 const getUsers = e => getData('users');
@@ -12,7 +11,7 @@ router.get('/', (req, res) => {
 	const users = getUsers();
 	
 	res.json(users)
-})
+});
 router.get('/:id', (req, res) => {
 	const
 	users = getUsers(),
@@ -22,22 +21,8 @@ router.get('/:id', (req, res) => {
 	if (user) return res.json(user)
 
 	res.status(404).json(false);
-})
+});
 
-
-router.post('/:id', (req, res) => {
-	const users = getUsers();
-	const user = users.find(user => user.id === +req.params.id);
-
-	if (!user)
-		return res.sendStatus(404);
-
-	Object.keys(req.body).forEach(key => user[key] = req.body[key]);
-
-	console.log('user', user, 'users', users)
-	if (setUsers(users)) return res.sendStatus(201);
-	res.sendStatus(500);
-})
 router.post('/book/:id', (req, res) => {
 	const users = getUsers();
 	const user = users.find(user => user.id === +req.params.id);
@@ -51,15 +36,13 @@ router.post('/book/:id', (req, res) => {
 
 	res.sendStatus(500);
 });
-
-
 router.post('/logIn', (req, res) => {
 	console.log('here')
 	if (
 		req.body.name === process.env.ADMIN_NAME
 		&&
 		req.body.password === process.env.ADMIN_PASSWORD
-	) return res.json({ id: process.env.ADMIN_ID, type: process.env.ADMIN_ID });
+	) return res.json({ id: process.env.ADMIN_ID });
 
 	const users = getUsers();
 	let user = users.find(user => user.number === req.body.number);
@@ -68,13 +51,12 @@ router.post('/logIn', (req, res) => {
 	if (!user) return res.sendStatus(404);
 
 	const { id, password } = user;
-	if (password === req.body.password)
-		return res.json({ id });
-	else return res.sendStatus(403);
-
-	res.sendStatus(500);
-})
+	if (password != req.body.password) return res.sendStatus(403);
+	
+	res.json({ id });
+});
 router.post('/signUp', (req, res) => {
+	console.log('signUp');
 	const bodyKeys = Object.keys(req.body);
 	
 	if (!(
@@ -95,8 +77,20 @@ router.post('/signUp', (req, res) => {
 
 	if (setUsers([...users, user])) return res.status(201).json({ id: user.id });
 	res.status(500).json(false);
-})
+});
+router.post('/:id', (req, res) => {
+	const users = getUsers();
+	const user = users.find(user => user.id === +req.params.id);
 
+	if (!user)
+		return res.sendStatus(404);
+
+	Object.keys(req.body).forEach(key => user[key] = req.body[key]);
+
+	if (setUsers(users)) return res.sendStatus(201);
+
+	res.sendStatus(500);
+});
 
 router.delete('/:id', (req, res) => {
 	const users = getUsers();

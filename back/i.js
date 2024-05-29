@@ -9,7 +9,6 @@ dataPaths = {
 	users: 'users',
 	rooms: 'rooms',
 },
-{ getData, setData } = require('./getScripts'),
 { users, rooms } = require('./getRouts')
 
 app.use(cors());

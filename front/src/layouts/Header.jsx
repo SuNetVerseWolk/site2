@@ -19,9 +19,9 @@ function Header() {
       const html = document.querySelector('html');
 
       if (html.scrollTop >= 200)
-        document.querySelector('header').classList.add(styles.headerBlack)
+        document.querySelector('header')?.classList.add(styles.headerBlack)
       else
-        document.querySelector('header').classList.remove(styles.headerBlack)
+        document.querySelector('header')?.classList.remove(styles.headerBlack)
     })
   }, []);
 
