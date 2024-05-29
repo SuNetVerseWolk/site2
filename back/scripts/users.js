@@ -18,6 +18,7 @@ router.get('/:id', (req, res) => {
 	users = getUsers(),
 	user = users.find(user => user.id === +req.params.id);
 
+	console.log(user, +req.params.id)
 	if (user) return res.json(user)
 
 	res.status(404).json(false);
@@ -88,11 +89,9 @@ router.post('/logIn', (req, res) => {
 	const users = getUsers();
 	let user = users.find(user => user.login === req.body.login);
 
-	console.log(user)
 	if (!user) return res.sendStatus(404);
 
 	const { id, password } = user;
-	console.log(req.body.password, password)
 	if (password === req.body.password)
 		return res.json({ id });
 	else return res.sendStatus(403);

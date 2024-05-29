@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import styles from "styles/header.module.css";
 import NavLinks from './NavLinks';
 import LogInBtn from 'components/LogInBtn';
+import { useQuery } from '@tanstack/react-query';
+import getApi from 'api/get';
+import UserBtn from 'components/UserBtn';
 
 function Header() {
   const [open, setIsOpened] = useState(false);
@@ -12,7 +15,7 @@ function Header() {
     <header>
       {open && (
         <div className={styles.popup}>
-          <LogInBtn />
+          <UserBtn />
 
           <NavLinks />
         </div>
@@ -21,7 +24,7 @@ function Header() {
         <a to=''><img src="logo2.png" alt="..." /></a>
 
         <NavLinks />
-        <LogInBtn />
+        <UserBtn />
         
         <button onClick={e => open ? setIsOpened(false) : setIsOpened(true)} className={styles.burgerContainer}>
           <div className={styles.burgerMenu}></div>
