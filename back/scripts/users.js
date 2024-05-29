@@ -25,17 +25,16 @@ router.get('/:id', (req, res) => {
 })
 
 
-router.post('/', (req, res) => {
-	if (!req.body.type || req.query.key !== process.env.ADMIN_ID) return res.sendStatus(403);
-
-	const user = { ...req.body, id: Date.now() }
+router.post('/:id', (req, res) => {
 	const users = getUsers();
+	const user = users.find(user => user.id === +req.params.id);
 
-	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName))
-		return res.sendStatus(400);
+	if (!user)
+		return res.sendStatus(404);
 
-	users.push(user);
+	Object.keys(req.body).forEach(key => user[key] = req.body[key]);
 
+	console.log('user', user, 'users', users)
 	if (setUsers(users)) return res.sendStatus(201);
 	res.sendStatus(500);
 })
@@ -52,30 +51,6 @@ router.post('/book/:id', (req, res) => {
 
 	res.sendStatus(500);
 });
-router.post('/change', (req, res) => {
-	const
-		userID = +req.query.id,
-		userType = req.query.type,
-		whatChange = req.body;
-
-	if (userID && userType) {
-		const
-			users = getData(userType),
-			user = users.find(user => user.id === userID);
-
-		if (!user) return res.status(404).json('user not found');
-
-		Object.keys(whatChange).forEach(key => {
-			if (key !== 'password' || (key === 'password' && !!whatChange[key]))
-				user[key] = whatChange[key]
-		});
-
-		if (setData(userType, users))
-			return res.status(200).json({ id: userID, type: userType });
-	}
-
-	res.status(500).json(false);
-})
 
 
 router.post('/logIn', (req, res) => {
