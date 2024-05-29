@@ -187,3 +187,10 @@ img {
 .headerBlack button {
     border: #c1beb1 1px solid;
 }
+.headerBlack {
+    .burgerMenu,
+    .burgerMenu::after,
+    .burgerMenu::before {
+        background: #c1beb1;
+    }
+}
