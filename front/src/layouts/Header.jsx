@@ -11,6 +11,17 @@ import UserBtn from 'components/UserBtn';
 function Header() {
   const [open, setIsOpened] = useState(false);
 
+  useEffect(e => {
+    addEventListener('scroll', e => {
+      const html = document.querySelector('html');
+
+      if (html.scrollTop >= 200)
+        document.querySelector('header').classList.add(styles.headerBlack)
+      else
+        document.querySelector('header').classList.remove(styles.headerBlack)
+    })
+  }, [])
+
   return (
     <header>
       {open && (

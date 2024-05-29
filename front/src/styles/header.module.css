@@ -10,6 +10,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 10;
+    transition: background .3s ease-out;
 }
 .container {
     display: flex;
@@ -23,7 +24,6 @@ header ul {
 }
 header ul a {
     position: relative;
-    /* font-size: clamp(10px, 1.5vw, 2rem);  */
 }
 header ul a::before,
 header ul a::after {
@@ -168,4 +168,22 @@ img {
         display: flex;
         align-items: center;
     }
+}
+
+.headerBlack {
+    background: #20202a;
+    border-bottom: #c1beb1 1px solid;
+
+    transition: background .3s ease-in;
+
+    * {
+        color: #c1beb1;
+    }
+}
+.headerBlack ul a::before,
+.headerBlack ul a::after {
+    background: #c1beb1;
+}
+.headerBlack button {
+    border: #c1beb1 1px solid;
 }
