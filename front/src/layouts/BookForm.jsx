@@ -149,7 +149,7 @@ const BookForm = ({ popupForm }) => {
           <button>Забронировать</button>
 
           <span>
-            <span ref={priceRef}>{getCurrentRoomData()?.price}</span> руб.
+            <span ref={priceRef}>{getCurrentRoomData && getCurrentRoomData()?.price}</span> руб.
           </span>
         </div>
       </form>
