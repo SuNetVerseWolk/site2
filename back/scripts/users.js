@@ -18,6 +18,7 @@ router.get('/:id', (req, res) => {
 	users = getUsers(),
 	user = users.find(user => user.id === +req.params.id);
 
+	console.log(user, +req.params.id)
 	if (user) return res.json(user)
 
 	res.status(404).json(false);
@@ -77,41 +78,25 @@ router.post('/change', (req, res) => {
 })
 
 
-router.get('/logIn', (req, res) => {
+router.post('/logIn', (req, res) => {
+	console.log('here')
 	if (
 		req.body.name === process.env.ADMIN_NAME
 		&&
 		req.body.password === process.env.ADMIN_PASSWORD
 	) return res.json({ id: process.env.ADMIN_ID, type: process.env.ADMIN_ID });
 
-	const
-		teachers = getData(dataPaths.teachers),
-		teacher = teachers.find(teacher => teacher.name === req.body.name);
-	let person = undefined;
+	const users = getUsers();
+	let user = users.find(user => user.login === req.body.login);
 
-	if (!!teacher) {
-		person = {
-			...teacher,
-			type: dataPaths.teachers
-		}
-	} else {
-		const student = getData(dataPaths.students).find(student => student.name === req.body.name);
+	if (!user) return res.sendStatus(404);
 
-		person = student ? {
-			...student,
-			type: dataPaths.students
-		} : undefined;
-	}
+	const { id, password } = user;
+	if (password === req.body.password)
+		return res.json({ id });
+	else return res.sendStatus(403);
 
-	if (!!person) {
-		const { id, password, type } = person;
-
-		if (password === req.body.password)
-			return res.json({ id, type });
-
-		res.status(403).json(false);
-	}
-	else res.status(404).json(false);
+	res.sendStatus(500);
 })
 router.post('/signUp', (req, res) => {
 	const bodyKeys = Object.keys(req.body);
@@ -129,7 +114,7 @@ router.post('/signUp', (req, res) => {
 	const user = { ...req.body, id: Date.now(), bookedRooms: [] }
 	const users = getUsers();
 
-	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName) != -1)
+	if (users.findIndex(selfUser => selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName || selfUser.login === user.login) != -1)
 		return res.sendStatus(403);
 
 	if (setUsers([...users, user])) return res.status(201).json({ id: user.id });
