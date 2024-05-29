@@ -5,11 +5,7 @@ import styles from 'styles/forms.module.css'
 
 const UserForm = ({ openUserForm, setIsOpenedUF }) => {
   const queryClient = useQueryClient();
-  const {
-    data: user,
-    isLoading,
-    isError,
-  } = getApi({
+  const { data: user } = getApi({
     key: ["user"],
     path: "/users/" + localStorage.getItem("id"),
   });
@@ -26,7 +22,7 @@ const UserForm = ({ openUserForm, setIsOpenedUF }) => {
 
             <form onSubmit={e => {
               e.preventDefault();
-              queryClient.invalidateQueries(['user']);
+              queryClient.setQueryData(['user'], {});
               setIsOpenedUF(false);
             }}>
               <h2>Данные клиента</h2>
