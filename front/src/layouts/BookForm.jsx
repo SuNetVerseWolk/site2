@@ -4,7 +4,6 @@ import styles from "styles/forms.module.css";
 
 const BookForm = ({ popupForm }) => {
   const formRef = useRef();
-  const priceRef = useRef();
   const getFormData = (e) =>
     Object.fromEntries(new FormData(formRef.current).entries());
   const getCurrentRoomData = (e) =>
@@ -21,7 +20,9 @@ const BookForm = ({ popupForm }) => {
   const { data: rooms } = getApi({
     key: [booksKinds.rooms],
     path: booksKinds.rooms,
+    onSuccess: date => setPrice(date?.[0].price)
   });
+  const [price, setPrice] = useState(0);
 
   function datediff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
@@ -33,7 +34,13 @@ const BookForm = ({ popupForm }) => {
     const out = new Date(formData.outDate);
     const days = datediff(come, out) + 1;
 
-    priceRef.current.textContent = getCurrentRoomData()?.price * formData.countPeople * formData.countRooms * (days || 1);
+    console.log(formData);
+    setPrice(
+      getCurrentRoomData()?.price *
+      formData.countPeople *
+      formData.countRooms *
+      (days || 1)
+    );
   };
 
   return (
@@ -148,9 +155,7 @@ const BookForm = ({ popupForm }) => {
         <div>
           <button>Забронировать</button>
 
-          <span>
-            <span ref={priceRef}>{getCurrentRoomData && getCurrentRoomData()?.price}</span> руб.
-          </span>
+          <span>{price} руб.</span>
         </div>
       </form>
     </div>
