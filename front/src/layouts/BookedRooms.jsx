@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from 'react'
 import Room from 'components/Room';
 import style from 'styles/rooms.module.css'
+import booked from 'styles/bookedRooms.module.css'
 import { useQueryClient } from '@tanstack/react-query';
 
 const BookedRooms = ({ bookedRooms }) => {
@@ -8,15 +9,16 @@ const BookedRooms = ({ bookedRooms }) => {
 	const getRoomByType = type => rooms?.find(roomIn => roomIn.name === type);
 	const roomContainer = useRef();
 
-	return (
-		<div className={style.rooms}>
-			<button className={style.left} onClick={e => {
+  return (
+		<div className={`${style.rooms} ${booked.rooms}`}>
+			<button className={`${style.left} ${booked.arrow}`} onClick={e => {
 				const scrollEl = roomContainer.current;
 				scrollEl.scrollTo({ behavior: 'smooth', left: scrollEl.scrollLeft - scrollEl.children[0].offsetWidth });
 			}}>{'<'}</button>
 			<div ref={roomContainer}>
 				{bookedRooms?.map(roomType => roomType?.books?.map(room =>
 					<Room
+						black={booked.room}
 						key={room.id}
 						name={roomType.typeRoom}
 						price={room.price}
@@ -34,7 +36,7 @@ const BookedRooms = ({ bookedRooms }) => {
 					/>
 				))}
 			</div>
-			<button className={style.right} onClick={e => {
+			<button className={`${style.right} ${booked.arrow}`} onClick={e => {
 				const scrollEl = roomContainer.current;
 				scrollEl.scrollTo({ behavior: 'smooth', left: scrollEl.scrollLeft + scrollEl.children[0].offsetWidth });
 			}}>{'>'}</button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Rooms from 'layouts/Rooms'
 import { roomLayout } from 'styles/roomLayout.module.css'
+import main from 'styles/main.module.css'
 import BookedRooms from './BookedRooms'
 import getApi from 'api/get'
 
@@ -11,11 +12,13 @@ const Room = ({ popupForm }) => {
   })
 
   return (
-    <div className={roomLayout}>
+    <div id={main.rooms} className={roomLayout}>
       {!isLoading && user?.bookedRooms?.length > 0 && (
 				<>
 					<h2>Забронированные номера</h2>
-					<BookedRooms bookedRooms={user.bookedRooms} />
+          <div id={main.booked}>
+					  <BookedRooms bookedRooms={user.bookedRooms} />
+          </div>
 				</>
 			)}
 

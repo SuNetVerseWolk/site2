@@ -198,4 +198,10 @@ img {
     .burgerMenu::before {
         background: #c1beb1;
     }
+    
+    .burgerContainer:hover .burgerMenu,
+    .burgerContainer:hover .burgerMenu::after,
+    .burgerContainer:hover .burgerMenu::before {
+        background: #2f2f33;
+    }
 }

@@ -1,6 +1,7 @@
 .roomLayout {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
     padding-block: 30px;
 
     h2 {

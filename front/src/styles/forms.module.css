@@ -282,8 +282,9 @@
         color: #20202a;
       }
       &:last-child:hover {
-        color: #c05757;
-        border: #c05757 1px solid;
+        color: #bc9191;
+        background: none;
+        border: #bc9191 1px solid;
       }
     }
   }
