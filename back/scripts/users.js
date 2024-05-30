@@ -26,8 +26,7 @@ router.get('/:id', (req, res) => {
 router.post('/book', (req, res) => {
 	const users = getUsers();
 	const rooms = getData('rooms');
-	let
-	book = {
+	let book = {
 		id: Date.now(),
 		countPeople: +req.body.countPeople,
 		countRooms: +req.body.countRooms,
@@ -128,6 +127,19 @@ router.delete('/:id', (req, res) => {
 	const users = getUsers();
 
 	res.sendStatus(setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500);
+})
+router.delete('/book/:id', (req, res) => {
+	const
+	type = req.query.type,
+	users = getUsers(),
+	user = users.find(user => user.id === +req.query.userID),
+	typeRoom = user.bookedRooms.find(room => room.typeRoom === type);
+
+	console.log('first', user.bookedRooms[typeRoom].books)
+	user.bookedRooms[typeRoom].books = typeRoom.books.filter(room => room.id != +req.params.id);
+	console.log('second', user.bookedRooms[typeRoom].books)
+
+	res.sendStatus(setUsers(users) ? 200 : 500);
 })
 
 module.exports = router;
