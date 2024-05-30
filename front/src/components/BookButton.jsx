@@ -7,8 +7,9 @@ const BookButton = ({ price, popupForm }) => {
         <h3>{price} / сутки</h3>
 
         <button onClick={e => {
-          popupForm.current.style.display = 'grid';
-        }}>Забронировать</button>
+          if (popupForm)
+						popupForm.current.style.display = 'grid';
+        }}>{popupForm ? 'Забронировать' : 'Отменить'}</button>
     </div>
   )
 }

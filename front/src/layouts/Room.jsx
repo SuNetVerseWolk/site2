@@ -1,16 +1,27 @@
 import React from 'react'
-import { Outlet, useParams } from 'react-router-dom'
 import Rooms from 'layouts/Rooms'
 import { roomLayout } from 'styles/roomLayout.module.css'
+import BookedRooms from './BookedRooms'
+import getApi from 'api/get'
 
 const Room = ({ popupForm }) => {
-  const { booked } = useParams();
+	const { data: user, isLoading } = getApi({
+    key: ['user'],
+    path: '/users/' + localStorage.getItem('id')
+  })
 
+	console.log('first0', user?.bookedRooms.length > 0, user)
   return (
     <div className={roomLayout}>
-      <h2>Варианты номеров</h2>
+      {!isLoading && user?.bookedRooms?.length > 0 && (
+				<>
+					<h2>Забронированные номера</h2>
+					<BookedRooms bookedRooms={user.bookedRooms} />
+				</>
+			)}
 
-      {booked ? <Outlet /> : <Rooms popupForm={popupForm} />}
+      <h2>Варианты номеров</h2>
+      <Rooms popupForm={popupForm} />
     </div>
   )
 }

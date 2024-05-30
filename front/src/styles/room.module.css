@@ -19,18 +19,18 @@
         object-fit: cover;
     }
 
-    p {
-        display: flex;
-        justify-content: space-between;
-        font-size: 70%;
-        margin: 5px 0;
-    }
-
     > div {
         display: flex;
         flex-flow: column nowrap;
         height: 100%;
         width: 55%;
+
+				> p:nth-child(2) {
+					display: flex;
+					justify-content: space-between;
+					font-size: 70%;
+					margin: 5px 0;
+				}
 
         div {
             display: flex;

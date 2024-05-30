@@ -7,9 +7,7 @@ import Rooms from 'layouts/Rooms'
 const App = () => {
   return (
     <Routes>
-			<Route path='/' element={<Home />} >
-        <Route path='/:booked' element={<Rooms />} />
-      </Route>
+			<Route path='/' element={<Home />} />
 
 			<Route
         path='/logIn'
