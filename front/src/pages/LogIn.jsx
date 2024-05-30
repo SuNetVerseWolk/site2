@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from 'styles/forms.module.css'
 
@@ -13,13 +13,35 @@ const LogIn = () => {
       localStorage.setItem('id', res.data.id);
       queryClient.invalidateQueries(['user']);
       navigate('..');
+    },
+    onError: res => {
+      console.log(res.response.status);
+      switch (res.response.status) {
+        case 404:
+          ref.current.number.setCustomValidity('Пользователь не найден!');
+          ref.current.number.reportValidity();
+          break;
+        case 403:
+          ref.current.password.setCustomValidity('Пароль не найден!');
+          ref.current.password.reportValidity();
+          break;
+      }
     }
   })
+  const ref = useRef();
 
   const submit = e => {
     e.preventDefault();
 
     mutate(Object.fromEntries(new FormData(e.target).entries()));
+  }
+
+  const setMissedFill = e => {
+    if (e.target.value.length <= 0) {
+      e.target.setCustomValidity('Вы пропустили это поле.');
+      e.target.reportValidity();
+    }
+    else e.target.setCustomValidity('');
   }
 
   return (
@@ -30,14 +52,14 @@ const LogIn = () => {
 
           <h2>Авторизация</h2>
 
-          <form onSubmit={submit}>
+          <form ref={ref} onSubmit={submit}>
             <label htmlFor="number">
               Номер:
-              <input id='number' name='number' type="text" required />
+              <input id='number' name='number' type="text" onChange={setMissedFill} required />
             </label>
             <label htmlFor="password">
               Пароль:
-              <input id='password' name='password' type="password" required />
+              <input id='password' name='password' type="password" onChange={setMissedFill} required />
             </label>
 
             <Link to='/signUp'>Зарегистрироваться</Link>
