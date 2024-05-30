@@ -5,7 +5,8 @@ import React, { useMemo, useRef, useState } from "react";
 import styles from "styles/forms.module.css";
 
 const BookForm = ({ popupForm }) => {
-  const queryClient = useQueryClient();
+	const nowDate = useMemo(e => new Date().toISOString().slice(0, 10), []);
+	const queryClient = useQueryClient();
 	const formRef = useRef();
 	const getFormData = (e) =>
 		Object.fromEntries(new FormData(formRef.current).entries());
@@ -53,7 +54,7 @@ const BookForm = ({ popupForm }) => {
 	const submit = e => {
 		e.preventDefault();
 
-		mutate({...Object.fromEntries(new FormData(e.target).entries()), price});
+		mutate({ ...Object.fromEntries(new FormData(e.target).entries()), price });
 	}
 
 	return (
@@ -158,11 +159,11 @@ const BookForm = ({ popupForm }) => {
 
 					<label htmlFor="comeDate">
 						Дата приезда:
-						<input id="comeDate" name="comeDate" type="date" required />
+						<input id="comeDate" name="comeDate" type="date" defaultValue={nowDate} required />
 					</label>
 					<label htmlFor="outDate">
 						Дата отъезда:
-						<input id="outDate" name="outDate" type="date" required />
+						<input id="outDate" name="outDate" type="date" defaultValue={nowDate} required />
 					</label>
 				</div>
 				<div>
