@@ -2,7 +2,7 @@ import React from 'react'
 import { room } from 'styles/room.module.css'
 import BookButton from './BookButton'
 
-const Room = ({ src, name, price, description, value, amount, bookedAmount, popupForm, black }) => {
+const Room = ({ src, id, name, price, description, value, amount, bookedAmount, popupForm, black }) => {
   return (
     <div className={`${room} ${black}`}>
       <img src={src} alt="..." />

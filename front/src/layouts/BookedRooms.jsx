@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useRef } from 'react'
 import Room from 'components/Room';
 import style from 'styles/rooms.module.css'
 import booked from 'styles/bookedRooms.module.css'
@@ -9,7 +9,7 @@ const BookedRooms = ({ bookedRooms }) => {
 	const getRoomByType = type => rooms?.find(roomIn => roomIn.name === type);
 	const roomContainer = useRef();
 
-  return (
+	return (
 		<div className={`${style.rooms} ${booked.rooms}`}>
 			<button className={`${style.left} ${booked.arrow}`} onClick={e => {
 				const scrollEl = roomContainer.current;
@@ -20,6 +20,7 @@ const BookedRooms = ({ bookedRooms }) => {
 					<Room
 						black={booked.room}
 						key={room.id}
+						id={room.id}
 						name={roomType.typeRoom}
 						price={room.price}
 						description={(
