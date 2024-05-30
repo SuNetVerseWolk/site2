@@ -4,8 +4,6 @@
     align-items: center;
     min-height: 80%;
 
-    margin-bottom: 100px;
-
     > button {
         width: 5%;
         aspect-ratio: 1;
