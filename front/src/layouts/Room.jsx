@@ -10,7 +10,6 @@ const Room = ({ popupForm }) => {
     path: '/users/' + localStorage.getItem('id')
   })
 
-	console.log('first0', user?.bookedRooms.length > 0, user)
   return (
     <div className={roomLayout}>
       {!isLoading && user?.bookedRooms?.length > 0 && (
