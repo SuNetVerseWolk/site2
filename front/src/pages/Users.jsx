@@ -25,13 +25,9 @@ const Users = () => {
             users.map(user => {
               const hasBooked = user.bookedRooms?.length > 0;
 
-              return (<>
+              return hasBooked && (<>
                 <h2>{user.number}</h2>
-                {hasBooked ? (
-                  <BookedRooms bookedRooms={user.bookedRooms} userID={user.id} />
-                ) : (
-                  <p>Нет забронированых номеров</p>
-                )}
+                <BookedRooms bookedRooms={user.bookedRooms} userID={user.id} />
               </>)
             })
           )}
