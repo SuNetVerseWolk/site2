@@ -98,9 +98,7 @@
 }
 .popUpForm form:not(.userPopupForm form), .userPopupForm form:not(.userPopupForm form) {
   display: grid;
-  /* justify-items: center; */
   align-content: center;
-  /* grid-template-columns: repeat(2, 50%); */
   gap: 20px;
   height: 100%;
   width: clamp(300px, 90vw, 700px);
@@ -115,8 +113,6 @@
   background: #20202a;
   border: #c1beb1 1px solid;
   padding: clamp(10px, 1rem, 30px);
-  /* width: 100%;
-   height: 100%; */
 }
 .popUpForm form:not(.userPopupForm form) > div *, .userPopupForm form:not(.userPopupForm form) > div * {
   color: #c1beb1;
@@ -134,8 +130,6 @@
 }
 .popUpForm form:not(.userPopupForm form) > div:last-child span, .userPopupForm form:not(.userPopupForm form) > div:last-child span {
   font-size: 40px;
-  /* display: flex;
-   flex-direction: column; */
 }
 .popUpForm form:not(.userPopupForm form) > div > div, .userPopupForm form:not(.userPopupForm form) > div > div {
   display: flex;
@@ -272,10 +266,8 @@
 @media (max-width: 540px) {
   .popUpForm form {
     grid-template-columns: 1fr;
-    /* grid-template-rows: repeat(3, 1fr); */
     overflow: scroll;
     overflow-x: hidden;
-    /* height: 100%; */
     padding-top: 130%;
   }
   .popUpForm form::-webkit-scrollbar {

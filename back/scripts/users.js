@@ -125,12 +125,10 @@ router.delete('/:id', (req, res) => {
 	user = users.find(user => user.id === +req.params.id),
 	rooms = getData('rooms');
 
-	console.log(rooms)
 	user.bookedRooms.forEach(bookedRoom => bookedRoom.books.forEach(book => {
 		const roomType = rooms.find(room => room.name === bookedRoom.typeRoom);
 		roomType.bookedAmount = roomType.bookedAmount - book.countRooms;
 	}));
-	console.log(rooms)
 
 	res.sendStatus(setData('rooms', rooms) ? setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500 : 500);
 })
