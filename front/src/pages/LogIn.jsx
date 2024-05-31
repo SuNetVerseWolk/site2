@@ -10,6 +10,12 @@ const LogIn = () => {
   const { mutate } = useMutation({
     mutationFn: data => axios.post(`/api/users/logIn`, data),
     onSuccess: res => {
+      if (res.data.id === import.meta.env.VITE_WORKER_ID) {
+        localStorage.setItem('id', res.data.id);
+        navigate('/users');
+
+        return;
+      }
       localStorage.setItem('id', res.data.id);
       queryClient.invalidateQueries(['user']);
       navigate('..');

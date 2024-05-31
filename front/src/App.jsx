@@ -3,6 +3,7 @@ import Home from 'pages/Home'
 import LogIn from 'pages/LogIn'
 import SignUp from 'pages/SignUp'
 import Rooms from 'layouts/Rooms'
+import Users from 'pages/Users'
 
 const App = () => {
   return (
@@ -17,6 +18,10 @@ const App = () => {
 			<Route
         path='/signUp'
         element={<SignUp />}
+      />
+      <Route
+        path='/users'
+        element={<Users />}
       />
     </Routes>
   )
