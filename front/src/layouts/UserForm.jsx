@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import getApi from 'api/get';
 import axios from 'axios';
 import React, { useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import styles from 'styles/forms.module.css'
 
 const UserForm = ({ openUserForm, setIsOpenedUF }) => {
+  const navigate = useNavigate();
   const formRef = useRef();
   const getFormData = (e) => Object.fromEntries(new FormData(formRef.current).entries());
   const queryClient = useQueryClient();
@@ -17,6 +19,7 @@ const UserForm = ({ openUserForm, setIsOpenedUF }) => {
     localStorage.removeItem('id')
     queryClient.setQueryData(['user'], {});
     setIsOpenedUF(false);
+    navigate('/logIn', {replace: true})
   }
   // +7 (999) 000-00-00
   const { mutate: deleteUser } = useMutation({
