@@ -15,8 +15,11 @@ header {
 .container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: clamp(60px, 3.5svw, 100px);
+
     padding-inline: clamp(30px, 3.5svw, 30px);
+    width: clamp(320px, 95svw, 1000px);
 }
 header ul {
     display: flex;
@@ -160,13 +163,21 @@ img {
         width: 100%;
     }
     header ul,
-    header .container button:not(.burgerContainer) {
+    .buttonAccount {
         display: none;
     }
 
     .burgerContainer {
         display: flex;
         align-items: center;
+    }
+}
+
+.exit {
+    &:hover {
+        color: #bc9191 !important;
+        background: none !important ;
+        border: #bc9191 1px solid; 
     }
 }
 
