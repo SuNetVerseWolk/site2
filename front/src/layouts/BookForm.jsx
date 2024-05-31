@@ -167,7 +167,7 @@ const BookForm = ({ popupForm }) => {
 					</label>
 				</div>
 				<div>
-					<button>Забронировать</button>
+					<button onClick={e => popupForm.current.style.display = 'none'}>Забронировать</button>
 
 					<span>{price} руб.</span>
 				</div>
