@@ -17,7 +17,7 @@ const Room = ({ popupForm }) => {
 				<>
 					<h2>Забронированные номера</h2>
           <div id={main.booked}>
-					  <BookedRooms bookedRooms={user.bookedRooms} />
+					  <BookedRooms bookedRooms={user.bookedRooms} isBlack={true} />
           </div>
 				</>
 			)}

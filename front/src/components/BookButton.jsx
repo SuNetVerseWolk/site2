@@ -3,10 +3,10 @@ import axios from 'axios'
 import React from 'react'
 import { bookBtn } from 'styles/bookBtn.module.css'
 
-const BookButton = ({ id, type, price, popupForm }) => {
+const BookButton = ({ id, type, price, popupForm, userID }) => {
   const queryClient = useQueryClient();
 	const { mutate } = useMutation({
-		mutationFn: data => axios.delete(`/api/users/book/${id}?type=${type}&userID=${localStorage.getItem('id')}`),
+		mutationFn: data => axios.delete(`/api/users/book/${id}?type=${type}&userID=${userID ? userID : localStorage.getItem('id')}`),
     onSuccess: res =>  queryClient.invalidateQueries()
 	})
 

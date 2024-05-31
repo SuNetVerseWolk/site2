@@ -16,7 +16,7 @@ function Header() {
   const [open, setIsOpened] = useState(false);
   const [openUserForm, setIsOpenedUF] = useState(false);
 
-  const checkWorker = localStorage.getItem('id') !== import.meta.env.VITE_WORKER_ID;
+  const checkWorker = localStorage.getItem('id') != import.meta.env.VITE_WORKER_ID;
 
   const exit = e => {
     localStorage.removeItem('id')
@@ -26,15 +26,21 @@ function Header() {
   }
 
   useEffect(e => {
-    addEventListener('scroll', e => {
-      const html = document.querySelector('html');
-
-      if (html.scrollTop >= 200)
-        document.querySelector('header')?.classList.add(styles.headerBlack)
-      else
-        document.querySelector('header')?.classList.remove(styles.headerBlack)
-    })
-  }, []);
+    if (checkWorker) {
+      const event = e => {
+        const html = document.querySelector('html');
+  
+        if (html.scrollTop >= 200)
+          document.querySelector('header')?.classList.add(styles.headerBlack)
+        else
+          document.querySelector('header')?.classList.remove(styles.headerBlack)
+      }
+  
+      addEventListener('scroll', event);
+  
+      return e => removeEventListener('scroll', event)
+    }
+  }, [localStorage.length]);
 
   return (
     <>
