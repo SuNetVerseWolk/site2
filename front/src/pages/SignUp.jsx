@@ -15,7 +15,6 @@ const SignUp = () => {
       navigate('..');
     },
     onError: res => {
-      console.log(res.response.status);
       switch (res.response.status) {
         case 403:
           ref.current.lastName.setCustomValidity('Пользователь уже имеется!');

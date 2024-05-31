@@ -13,7 +13,6 @@ const Users = () => {
     path: '/users'
   })
 
-  console.log(users)
   return (
     <>
       <Header/>
