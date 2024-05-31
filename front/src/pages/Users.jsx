@@ -13,6 +13,7 @@ const Users = () => {
     path: '/users'
   })
 
+  console.log(users)
   return (
     <>
       <Header/>
@@ -20,7 +21,7 @@ const Users = () => {
         <div id={main.rooms} className={roomLayout}>
           {isLoading ? (
             <Alert children={'Загрузка...'} />
-          ) : (
+          ) : users.length > 0 ? (
             users.map(user => {
               const hasBooked = user.bookedRooms?.length > 0;
 
@@ -29,6 +30,8 @@ const Users = () => {
                 <BookedRooms bookedRooms={user.bookedRooms} userID={user.id} />
               </>)
             })
+          ) : (
+            <Alert children={'Пусто'} />
           )}
         </div>
       </main>
