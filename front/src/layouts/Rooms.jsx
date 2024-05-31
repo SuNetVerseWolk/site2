@@ -1,20 +1,15 @@
 import React, { useMemo, useRef } from 'react'
-import { useParams } from 'react-router-dom';
 import Alert from 'components/Alert';
 import getApi from 'api/get';
 import Room from 'components/Room';
 import style from 'styles/rooms.module.css'
 
 const Rooms = ({ popupForm }) => {
-  const { booked } = useParams();
-  const booksKinds = useMemo(e => JSON.parse(import.meta.env.VITE_BOOKSKINDS), []);
-  const booksKind = useMemo(e => booked === booksKinds.booked ? booksKinds.booked : booksKinds.rooms, [booked, booksKinds]);
-  const isBooked = useMemo(e => booksKind === booksKinds.booked, [booksKind, booksKinds]);
   const roomContainer = useRef();
 
   const { data: rooms, isLoading, isError} = getApi({
-    key: [booksKind],
-    path: isBooked ? `${booksKind}?userId=${localStorage.getItem('userID')}` : booksKind
+    key: ['rooms'],
+    path: 'rooms'
   })
 
   return (
