@@ -3,49 +3,39 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-
     min-height: 400px;
     width: 100%;
     border-block: #20202a 1px solid;
-
-    h2 {
-        font-size: 30px;
-    }
-
-    > div {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        > div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            div {
-                display: grid;
-                place-items: center;
-
-                background: #b5b5b5;
-                height: 120px;
-                width: 120px;
-
-                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-                
-                transition: all .3s ease-in-out;
-
-                &:hover {
-                    transform: scale(1.05);
-                    rotate: 360deg;
-                }
-            }
-            
-            margin: 30px;
-        }
-    }
-
-    img {
-        height: 50px;
-        width: 50px;
-    }
-}
+  }
+  .serviceContainer h2 {
+    font-size: 30px;
+  }
+  .serviceContainer > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .serviceContainer > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+  }
+  .serviceContainer > div > div div {
+    display: grid;
+    place-items: center;
+    background: #b5b5b5;
+    height: 120px;
+    width: 120px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transition: all 0.3s ease-in-out;
+  }
+  .serviceContainer > div > div div:hover {
+    transform: scale(1.05);
+    rotate: 360deg;
+  }
+  .serviceContainer img {
+    height: 50px;
+    width: 50px;
+  }
+  

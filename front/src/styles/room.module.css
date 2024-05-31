@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     background: white;
     border: 1px #000 solid;
     padding: 10px;
@@ -11,34 +10,30 @@
     min-width: 550px;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-
-    img {
-        width: 45%;
-        margin-right: 10px;
-        aspect-ratio: 1;
-        object-fit: cover;
-    }
-
-    > div {
-        display: flex;
-        flex-flow: column nowrap;
-        height: 100%;
-        width: 55%;
-
-        > p {
-            font-size: 70%;
-        }
-
-        > p:nth-child(2) {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
-
-        div {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: auto;
-        }
-    }
-}
+  }
+  .room img {
+    width: 45%;
+    margin-right: 10px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .room > div {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    width: 55%;
+  }
+  .room > div > p {
+    font-size: 70%;
+  }
+  .room > div > p:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+  .room > div div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+  }
+  

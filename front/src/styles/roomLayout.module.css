@@ -3,9 +3,9 @@
     flex-flow: column nowrap;
     align-items: center;
     padding-block: 30px;
-
-    h2 {
-        font-size: 30px;
-        text-align: center;
-    }
-}
+  }
+  .roomLayout h2 {
+    font-size: 30px;
+    text-align: center;
+  }
+  
