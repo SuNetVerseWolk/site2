@@ -17,7 +17,6 @@ router.get('/:id', (req, res) => {
 	users = getUsers(),
 	user = users.find(user => user.id === +req.params.id);
 
-	console.log(user, +req.params.id)
 	if (user) return res.json(user)
 
 	res.status(404).json(false);
@@ -68,7 +67,6 @@ router.post('/book', (req, res) => {
 	res.sendStatus(500);
 });
 router.post('/logIn', (req, res) => {
-	console.log('here')
 	if (
 		req.body.name === process.env.ADMIN_NAME
 		&&
@@ -78,7 +76,6 @@ router.post('/logIn', (req, res) => {
 	const users = getUsers();
 	let user = users.find(user => user.number === req.body.number);
 
-	console.log(user)
 	if (!user) return res.sendStatus(404);
 
 	const { id, password } = user;
@@ -87,7 +84,6 @@ router.post('/logIn', (req, res) => {
 	res.json({ id });
 });
 router.post('/signUp', (req, res) => {
-	console.log('signUp');
 	const bodyKeys = Object.keys(req.body);
 	
 	if (!(
@@ -129,15 +125,16 @@ router.delete('/:id', (req, res) => {
 	res.sendStatus(setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500);
 })
 router.delete('/book/:id', (req, res) => {
+	console.log('del book')
 	const
 	type = req.query.type,
 	users = getUsers(),
 	user = users.find(user => user.id === +req.query.userID),
 	typeRoom = user.bookedRooms.find(room => room.typeRoom === type);
 
-	console.log('first', user.bookedRooms[typeRoom].books)
-	user.bookedRooms[typeRoom].books = typeRoom.books.filter(room => room.id != +req.params.id);
-	console.log('second', user.bookedRooms[typeRoom].books)
+	typeRoom.books = typeRoom.books.filter(room => room.id != +req.params.id);
+	if (typeRoom.books.length <= 0)
+		user.bookedRooms = user.bookedRooms.filter(room => room.typeRoom != type);
 
 	res.sendStatus(setUsers(users) ? 200 : 500);
 })
