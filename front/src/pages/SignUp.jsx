@@ -61,25 +61,25 @@ const SignUp = () => {
                 </label>
                 <label htmlFor="name">
                   Имя:
-                  <input id='name' onChange={setMissedFill} name='name' type="text" placeholder='Вадим' required />
+                  <input id='name' name='name' type="text" placeholder='Вадим' required />
                 </label>
                 <label htmlFor="fatherName">
                   Отчество:
-                  <input id='fatherName' onChange={setMissedFill} name='fatherName' type="text" placeholder='Владимирович' required />
+                  <input id='fatherName' name='fatherName' type="text" placeholder='Владимирович' required />
                 </label>
               </div>
               <div>
                 <label htmlFor="number">
                   Номер:
-                  <input id='number' onChange={setMissedFill} name='number' type="tel" placeholder='+7 (900) 800-90-90' required />
+                  <input id='number' name='number' type="tel" placeholder='+7 (900) 800-90-90' required />
                 </label>
                 <label htmlFor="email">
                   Email:
-                  <input id='email' onChange={setMissedFill} name='email' type="text" required placeholder='pavlov@gmail.com' />
+                  <input id='email' name='email' type="email" required placeholder='pavlov@gmail.com' />
                 </label>
                 <label htmlFor="password">
                   Пароль:
-                  <input id='password' onChange={setMissedFill} name='password' type="password" required />
+                  <input id='password' name='password' type="password" required />
                 </label>
               </div>
             </div>

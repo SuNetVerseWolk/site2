@@ -21,7 +21,7 @@ const UserForm = ({ openUserForm, setIsOpenedUF }) => {
     setIsOpenedUF(false);
     navigate('/logIn', {replace: true})
   }
-  // +7 (999) 000-00-00
+  
   const { mutate: deleteUser } = useMutation({
     mutationFn: e => axios.delete('/api/users/' + localStorage.getItem('id')),
     onSuccess: res => exit()

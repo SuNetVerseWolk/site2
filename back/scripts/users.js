@@ -99,7 +99,7 @@ router.post('/signUp', (req, res) => {
 	const user = { ...req.body, id: Date.now(), bookedRooms: [] }
 	const users = getUsers();
 
-	if (users.findIndex(selfUser => selfUser.number === user.number && selfUser.name === user.name && selfUser.lastName === user.lastName && selfUser.fatherName === user.fatherName) != -1)
+	if (users.findIndex(selfUser => selfUser.number === user.number) != -1)
 		return res.sendStatus(403);
 
 	if (setUsers([...users, user])) return res.status(201).json({ id: user.id });
