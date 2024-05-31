@@ -7,7 +7,7 @@ const BookButton = ({ id, type, price, popupForm }) => {
   const queryClient = useQueryClient();
 	const { mutate } = useMutation({
 		mutationFn: data => axios.delete(`/api/users/book/${id}?type=${type}&userID=${localStorage.getItem('id')}`),
-    onSuccess: res =>  queryClient.invalidateQueries(['rooms'])
+    onSuccess: res =>  queryClient.invalidateQueries()
 	})
 
   return (

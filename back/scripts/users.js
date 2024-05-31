@@ -125,18 +125,21 @@ router.delete('/:id', (req, res) => {
 	res.sendStatus(setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500);
 })
 router.delete('/book/:id', (req, res) => {
-	console.log('del book')
 	const
 	type = req.query.type,
 	users = getUsers(),
 	user = users.find(user => user.id === +req.query.userID),
-	typeRoom = user.bookedRooms.find(room => room.typeRoom === type);
+	typeRoom = user.bookedRooms.find(room => room.typeRoom === type),
+	rooms = getData('rooms');
+
+	const roomType = rooms.find(room => room.name === type);
+	roomType.bookedAmount = roomType.bookedAmount - typeRoom.books.find(room => room.id === +req.params.id).countRooms;
 
 	typeRoom.books = typeRoom.books.filter(room => room.id != +req.params.id);
 	if (typeRoom.books.length <= 0)
 		user.bookedRooms = user.bookedRooms.filter(room => room.typeRoom != type);
 
-	res.sendStatus(setUsers(users) ? 200 : 500);
+	res.sendStatus(setUsers(users) ? setData('rooms', rooms) ? 200 : 500 : 500);
 })
 
 module.exports = router;
