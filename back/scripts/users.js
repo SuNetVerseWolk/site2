@@ -120,9 +120,19 @@ router.post('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-	const users = getUsers();
+	const
+	users = getUsers(),
+	user = users.find(user => user.id === +req.params.id),
+	rooms = getData('rooms');
 
-	res.sendStatus(setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500);
+	console.log(rooms)
+	user.bookedRooms.forEach(bookedRoom => bookedRoom.books.forEach(book => {
+		const roomType = rooms.find(room => room.name === bookedRoom.typeRoom);
+		roomType.bookedAmount = roomType.bookedAmount - book.countRooms;
+	}));
+	console.log(rooms)
+
+	res.sendStatus(setData('rooms', rooms) ? setUsers(users.filter(user => user.id != +req.params.id)) ? 200 : 500 : 500);
 })
 router.delete('/book/:id', (req, res) => {
 	const

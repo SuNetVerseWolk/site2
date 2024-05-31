@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from 'styles/forms.module.css'
 
 const UserForm = ({ openUserForm, setIsOpenedUF }) => {
+  const useClient = useQueryClient();
   const navigate = useNavigate();
   const formRef = useRef();
   const getFormData = (e) => Object.fromEntries(new FormData(formRef.current).entries());
@@ -24,7 +25,10 @@ const UserForm = ({ openUserForm, setIsOpenedUF }) => {
   
   const { mutate: deleteUser } = useMutation({
     mutationFn: e => axios.delete('/api/users/' + localStorage.getItem('id')),
-    onSuccess: res => exit()
+    onSuccess: res => {
+      useClient.invalidateQueries(['rooms']);
+      exit()
+    }
   })
   const { mutate: changeUserData } = useMutation({
     mutationFn: data => axios.post('/api/users/' + localStorage.getItem('id'), data),
