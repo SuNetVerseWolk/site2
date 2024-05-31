@@ -1,11 +1,13 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 import { bookBtn } from 'styles/bookBtn.module.css'
 
-const BookButton = ({ price, popupForm }) => {
+const BookButton = ({ id, type, price, popupForm }) => {
+  const queryClient = useQueryClient();
 	const { mutate } = useMutation({
-		mutationFn: data => axios.delete(`/api/book/${id}?type=${name}&userID=${localStorage.getItem('id')}`)
+		mutationFn: data => axios.delete(`/api/users/book/${id}?type=${type}&userID=${localStorage.getItem('id')}`),
+    onSuccess: res =>  queryClient.invalidateQueries(['rooms'])
 	})
 
   return (
