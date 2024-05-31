@@ -1,10 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getApi from "api/get";
 import axios from "axios";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "styles/forms.module.css";
 
 const BookForm = ({ popupForm }) => {
+	const { type } = useParams();
 	const nowDate = useMemo(e => new Date().toISOString().slice(0, 10), []);
 	const queryClient = useQueryClient();
 	const formRef = useRef();
@@ -26,25 +28,24 @@ const BookForm = ({ popupForm }) => {
 		path: booksKinds.rooms,
 		onSuccess: date => setPrice(prev => prev <= 0 ? date?.[0].price : prev)
 	});
+	const countPrice = e => {
+		const formData = getFormData();
+		const come = new Date(formData.comeDate);
+		const out = new Date(formData.outDate);
+		const days = datediff(come, out) + 1;
+
+		return getCurrentRoomData()?.price *
+		formData.countPeople *
+		formData.countRooms *
+		(days || 1)
+	}
 	const [price, setPrice] = useState(0);
 
 	function datediff(first, second) {
 		return Math.round((second - first) / (1000 * 60 * 60 * 24));
 	}
 
-	const changeForm = (e) => {
-		const formData = getFormData();
-		const come = new Date(formData.comeDate);
-		const out = new Date(formData.outDate);
-		const days = datediff(come, out) + 1;
-
-		setPrice(
-			getCurrentRoomData()?.price *
-			formData.countPeople *
-			formData.countRooms *
-			(days || 1)
-		);
-	};
+	const changeForm = (e) => setPrice(countPrice());
 
 	const { mutate } = useMutation({
 		mutationFn: data => axios.post('/api/users/book', data),
@@ -56,6 +57,8 @@ const BookForm = ({ popupForm }) => {
 
 		mutate({ ...Object.fromEntries(new FormData(e.target).entries()), price });
 	}
+	
+	useEffect(e => setPrice(countPrice()), [type]);
 
 	return (
 		<div ref={popupForm} className={styles.popUpForm}>
@@ -122,9 +125,9 @@ const BookForm = ({ popupForm }) => {
 							formRef.current.countPeople.value = 1;
 						}}
 					>
-						<option>Классика</option>
-						<option>Стандарт</option>
-						<option>Люкс</option>
+						<option selected={type === 'Классика'}>Классика</option>
+						<option selected={type === 'Стандарт'}>Стандарт</option>
+						<option selected={type === 'Люкс'}>Люкс</option>
 					</select>
 					<label htmlFor="countPeople">
 						Кол-во человек:

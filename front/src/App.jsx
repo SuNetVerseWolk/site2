@@ -8,7 +8,9 @@ import Users from 'pages/Users'
 const App = () => {
   return (
     <Routes>
-			<Route path='/' element={<Home />} />
+			<Route path='/' element={<Home />}>
+        <Route path='/:type' element={null}/>
+      </Route>
 
 			<Route
         path='/logIn'
@@ -19,10 +21,9 @@ const App = () => {
         path='/signUp'
         element={<SignUp />}
       />
-      <Route
-        path='/users'
-        element={<Users />}
-      />
+      <Route path='/users/' element={<Users />}>
+        <Route path='/users/:type'/>
+      </Route>
     </Routes>
   )
 }
