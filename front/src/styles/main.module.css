@@ -2,7 +2,6 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: center;
     min-height: calc(100svh - 100px);
 }
 .main > section, .main #booked > div, .main > div:not(#rooms), .main #rooms > div:not(#booked) {

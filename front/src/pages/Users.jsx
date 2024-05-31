@@ -1,6 +1,6 @@
 import Header from 'layouts/Header'
 import React, { useRef } from 'react'
-import { roomLayout } from 'styles/roomLayout.module.css'
+import { roomLayout, centred } from 'styles/roomLayout.module.css'
 import main from 'styles/main.module.css'
 import getApi from 'api/get'
 import Alert from 'components/Alert'
@@ -29,17 +29,19 @@ const Users = () => {
 
           {isLoading ? (
             <Alert children={'Загрузка...'} />
-          ) : users.length > 0 ? (
+          ) : (
             users.map(user => {
               const hasBooked = user.bookedRooms?.length > 0;
 
-              return hasBooked && (<>
+              return hasBooked ? (<>
                 <h2>{user.number}</h2>
                 <BookedRooms bookedRooms={user.bookedRooms} userID={user.id} />
-              </>)
+              </>) : (
+                <div className={centred}>
+                  <Alert children={'Нет забронированных номеров'} />
+                </div>
+              )
             })
-          ) : (
-            <Alert children={'Пусто'} />
           )}
         </div>
       </main>

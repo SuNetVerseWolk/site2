@@ -1,10 +1,15 @@
 .roomLayout {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-  .roomLayout h2 {
-    font-size: 30px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 100%;
+}
+.roomLayout h2 {
+  font-size: 30px;
+  text-align: center;
+}
+.roomLayout .centred {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
