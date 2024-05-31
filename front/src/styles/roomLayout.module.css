@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding-block: 30px;
+    /* padding-block: 30px; */
   }
   .roomLayout h2 {
     font-size: 30px;

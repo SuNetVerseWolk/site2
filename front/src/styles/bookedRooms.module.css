@@ -21,4 +21,9 @@
     color: #20202a !important;
     background: #c1beb1 !important;
   }
+  .room .bookBtn:hover {
+    color: #20202a;
+    background: #c1beb1;
+    border-color: #c1beb1;
+  }
   

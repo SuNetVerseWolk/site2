@@ -18,3 +18,7 @@
     width: 100vw;
     background: #20202a;
 }
+#booked h2 {
+    color: #c1beb1;
+    margin-top: 20px;
+}

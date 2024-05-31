@@ -12,7 +12,7 @@ const Room = ({ src, id, name, price, description, value, amount, bookedAmount, 
         
         <p>{description}</p>
         <div>
-          <BookButton id={id} type={name} popupForm={popupForm} price={price} userID={userID} />
+          <BookButton isBlack={!!black} id={id} type={name} popupForm={popupForm} price={price} userID={userID} />
         </div>
       </div>
     </div>

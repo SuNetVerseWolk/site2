@@ -23,8 +23,10 @@ const Users = () => {
       <Header/>
       <main className={style.main}>
         <div id={main.rooms} className={roomLayout}>
-          <h2>Варианты номеров</h2>
-          <Rooms popupForm={popupForm} />
+          <div id={main.booked}>
+            <h2>Варианты номеров</h2>
+            <Rooms isBlack={true} popupForm={popupForm} />
+          </div>
 
           {isLoading ? (
             <Alert children={'Загрузка...'} />
