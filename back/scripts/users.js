@@ -10,7 +10,7 @@ const setUsers = data => setData('users', data);
 router.get('/', (req, res) => {
 	const users = getUsers();
 	
-	res.json(users)
+	res.json(users.map(user => ({...user, password: ''})))
 });
 router.get('/:id', (req, res) => {
 	const
