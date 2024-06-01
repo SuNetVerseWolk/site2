@@ -49,7 +49,13 @@ const BookForm = ({ popupForm }) => {
 
 	const { mutate } = useMutation({
 		mutationFn: data => axios.post('/api/users/book', data),
-		onSuccess: res => queryClient.invalidateQueries(['rooms'])
+		onSuccess: res => {
+			if (!localStorage.getItem('id'))
+				localStorage.setItem('id', res.data.id)
+
+			queryClient.invalidateQueries(['rooms'])
+			popupForm.current.style.display = 'none';
+		}
 	});
 
 	const submit = e => {
@@ -170,7 +176,7 @@ const BookForm = ({ popupForm }) => {
 					</label>
 				</div>
 				<div>
-					<button onClick={e => popupForm.current.style.display = 'none'}>Забронировать</button>
+					<button>Забронировать</button>
 
 					<span>{price} руб.</span>
 				</div>

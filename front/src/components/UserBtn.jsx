@@ -21,7 +21,7 @@ const UserBtn = ({ setIsOpenedUF, setIsOpened }) => {
           <button onClick={e => {
             setIsOpenedUF(true);
             setIsOpened && setIsOpened(false);
-          }}>{user.number}</button>
+          }}>{user?.number}</button>
         ) : (
           <LogInBtn />
         )

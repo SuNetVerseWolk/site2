@@ -62,7 +62,7 @@ router.post('/book', (req, res) => {
 	roomType.bookedAmount = roomType.bookedAmount + book.countRooms;
 	setData('rooms', rooms);
 	
-	if (setUsers(users)) return res.sendStatus(201);
+	if (setUsers(users)) return res.status(201).json({ id: user.id });
 
 	res.sendStatus(500);
 });
