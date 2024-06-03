@@ -1,6 +1,6 @@
 import Header from 'layouts/Header'
 import React, { useRef } from 'react'
-import { roomLayout, centred } from 'styles/roomLayout.module.css'
+import { roomLayout } from 'styles/roomLayout.module.css'
 import main from 'styles/main.module.css'
 import getApi from 'api/get'
 import Alert from 'components/Alert'

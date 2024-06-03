@@ -5,7 +5,7 @@ import booked from 'styles/bookedRooms.module.css'
 import getApi from 'api/get';
 
 const BookedRooms = ({ bookedRooms, isBlack, userID }) => {
-	const { data: rooms, isLoading, isError} = getApi({
+	const { data: rooms } = getApi({
 		key: ['rooms'],
 		path: 'rooms'
 	})
